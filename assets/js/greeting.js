@@ -7,52 +7,110 @@ const today = new Date();
 const hour = today.getHours();
 const name = CONFIG.name;
 
-const gree1 = `${CONFIG.greetingNight}\xa0`;
-const gree2 = `${CONFIG.greetingMorning}\xa0`;
-const gree3 = `${CONFIG.greetingAfternoon}\xa0`;
-const gree4 = `${CONFIG.greetingEvening}\xa0`;
-
-let greetingText = '';
+let baseGreeting = '';
 if (hour >= 23 || hour < 6) {
-	greetingText = gree1 + name;
+	baseGreeting = CONFIG.greetingNight;
 } else if (hour >= 6 && hour < 12) {
-	greetingText = gree2 + name;
+	baseGreeting = CONFIG.greetingMorning;
 } else if (hour >= 12 && hour < 17) {
-	greetingText = gree3 + name;
+	baseGreeting = CONFIG.greetingAfternoon;
 } else {
-	greetingText = gree4 + name;
+	baseGreeting = CONFIG.greetingEvening;
 }
 
-const typeWriter = (element, text, speed = 40) => {
-	element.innerHTML = '<span id="greeting-text"></span>';
-	const textSpan = document.getElementById('greeting-text');
+// Format base greeting and suffix intelligently for natural English flow
+let baseText = baseGreeting;
+let suffixText = '.';
+
+if (baseGreeting.endsWith('!')) {
+	baseText = baseGreeting.slice(0, -1) + ',';
+	suffixText = '!';
+} else if (baseGreeting.endsWith('.')) {
+	baseText = baseGreeting.slice(0, -1) + ',';
+	suffixText = '.';
+} else if (!baseGreeting.endsWith(',')) {
+	baseText = baseGreeting + ',';
+	suffixText = '.';
+}
+
+const typeWriter = (element, base, nameVal, suffix, speed = 40) => {
+	element.innerHTML = `
+		<span class="greeting-base"></span>
+		<span class="greeting-name"></span>
+		<span class="greeting-suffix"></span>
+		<span class="typewriter-cursor"></span>
+	`;
 	
-	let i = 0;
+	const baseSpan = element.querySelector('.greeting-base');
+	const nameSpan = element.querySelector('.greeting-name');
+	const suffixSpan = element.querySelector('.greeting-suffix');
+	const cursor = element.querySelector('.typewriter-cursor');
+	
+	let charIndex = 0;
+	let currentPart = 'base'; // 'base', 'name', 'suffix'
+	
 	const type = () => {
-		if (i < text.length) {
-			const char = text.charAt(i);
-			textSpan.textContent += char;
-			i++;
+		let textToType = '';
+		let targetSpan = null;
+		
+		if (currentPart === 'base') {
+			textToType = base;
+			targetSpan = baseSpan;
+		} else if (currentPart === 'name') {
+			textToType = nameVal;
+			targetSpan = nameSpan;
+		} else if (currentPart === 'suffix') {
+			textToType = suffix;
+			targetSpan = suffixSpan;
+		}
+		
+		if (charIndex < textToType.length) {
+			const char = textToType.charAt(charIndex);
+			targetSpan.textContent += char;
+			charIndex++;
 			
-			// Natural human speed variations (jitter)
-			let delay = speed + (Math.random() * 16 - 8);
+			// Keep cursor solid and visible while typing
+			cursor.classList.add('typing');
 			
-			// Add natural pauses at punctuation marks
+			// Speed control: standard speed with slight random variation
+			let delay = speed + (Math.random() * 20 - 10);
+			
+			// Pauses at punctuation
 			if (char === ',' || char === '!' || char === '.') {
-				delay = 300;
+				delay = 350;
+				cursor.classList.remove('typing'); // Let cursor blink during pauses
+			} else if (char === ' ') {
+				delay = speed + 30; // Slightly longer pause between words
 			}
 			
 			setTimeout(type, delay);
 		} else {
-			// Finished typing the greeting and name:
-			// Pause for 350ms, then append a single period "."
-			setTimeout(() => {
-				textSpan.textContent += '.';
-			}, 350);
+			// Part complete, transition to next part
+			if (currentPart === 'base') {
+				currentPart = 'name';
+				charIndex = 0;
+				// Add a non-breaking space before the name
+				nameSpan.textContent = '\xa0';
+				cursor.classList.remove('typing');
+				setTimeout(type, 300); // Small delay before typing the name
+			} else if (currentPart === 'name') {
+				currentPart = 'suffix';
+				charIndex = 0;
+				cursor.classList.remove('typing');
+				setTimeout(type, 400); // Small delay before typing the punctuation
+			} else {
+				// Typing finished
+				cursor.classList.remove('typing');
+				// Let the cursor blink for 2 seconds, then fade out
+				setTimeout(() => {
+					cursor.classList.add('fade-out');
+				}, 2000);
+			}
 		}
 	};
 	
-	type();
+	// Start typing with a slight initial delay for loading transition
+	setTimeout(type, 500);
 };
 
-typeWriter(document.getElementById('greetings'), greetingText, 40);
+typeWriter(document.getElementById('greetings'), baseText, name, suffixText, 45);

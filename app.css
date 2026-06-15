@@ -6,7 +6,7 @@
 
 /* V A R I A B L E S */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap'); /* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap'); /* Font Import */
 
 :root {
   /* Font Size */
@@ -56,7 +56,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   transition: 0.2s ease-in-out;
 }
 
@@ -189,6 +189,53 @@ body {
 #greetings {
   font-size: var(--fg-secondary);
   color: var(--fg);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.greeting-base,
+.greeting-suffix {
+  font-weight: 300;
+  opacity: 0.85;
+}
+
+.greeting-name {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.15em;
+  background-color: var(--fg);
+  margin-left: 3px;
+  vertical-align: -0.1em;
+  opacity: 1;
+  animation: typewriter-blink 1s step-end infinite;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.typewriter-cursor.typing {
+  animation: none;
+  opacity: 1;
+}
+
+.typewriter-cursor.fade-out {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes typewriter-blink {
+  from, to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--fg);
+  }
 }
 
 .weatherIcon img {
