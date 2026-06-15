@@ -105,6 +105,7 @@ body {
 #themeIcon {
   width: 22px;
   height: 22px;
+  font-size: 22px;
 }
 
 #themeButton svg {
@@ -353,6 +354,7 @@ body {
 .buttonIcon {
   width: var(--icon);
   height: var(--icon);
+  font-size: var(--icon);
   color: var(--fg);
 }
 
@@ -383,8 +385,8 @@ body {
 .button:hover {
   background-color: var(--accent);
 }
-.button:hover svg {
-  stroke: var(--background);
+.button:hover .buttonIcon {
+  color: var(--background);
 }
 
 .listsContainer {
@@ -418,6 +420,7 @@ body {
   color: var(--fg);
   width: var(--icon);
   height: var(--icon);
+  font-size: var(--icon);
 }
 .listItem {
   text-decoration: none;
