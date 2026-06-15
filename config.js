@@ -2,7 +2,7 @@
 // └─┐│ │││││ ┬├┤ └─┐
 // └─┘└─┘┘└┘└─┘└─┘└─┘
 // A minimal, premium startpage
-// Copy this file to config.js and customize.
+// Edit this file to personalize your startpage.
 
 const CONFIG = {
 	// ┌┐ ┌─┐┌─┐┬┌─┐┌─┐
