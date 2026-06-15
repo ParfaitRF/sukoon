@@ -28,7 +28,7 @@ function displayClock() {
 	document.getElementById('separator').innerHTML = ' : ';
 	document.getElementById('minutes').innerText = min + ampm;
 
-	document.getElementById('fullDate').innerText = `${dayOfWeek}, ${mm} ${dd}`;
+	document.getElementById('fullDate').innerHTML = `<span class="dateAccent">${dayOfWeek}</span>, ${mm} ${dd}`;
 
 	setTimeout(displayClock, 1000);
 }
