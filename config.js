@@ -10,9 +10,9 @@ const CONFIG = {
 	// └─┘┴ ┴└─┘┴└─┘└─┘
 
 	// General
-	name: 'YourName',
+	name: 'CasavaFarmer',
 	imageBackground: false,
-	openInNewTab: true,
+	openInNewTab: false,
 	twelveHourFormat: true,
 
 	// Greetings
@@ -25,13 +25,13 @@ const CONFIG = {
 	layout: 'bento', // 'bento', 'lists', 'buttons'
 
 	// Weather
-	weatherKey: '', // Get your API key from https://openweathermap.org/
+	weatherKey: 'a76926689658ed9faf0f5f760ba2d636', // Get your API key from https://openweathermap.org/
 	weatherIcons: 'OneDark', // 'OneDark', 'Nord', 'Dark', 'White'
 	weatherUnit: 'C', // 'C' or 'F'
 	language: 'en', // More languages at https://openweathermap.org/current#multi
 	trackLocation: true, // If false or an error occurs, the app will use the lat/lon below
-	defaultLatitude: '0.0',
-	defaultLongitude: '0.0',
+	defaultLatitude: '52.4223885',
+	defaultLongitude: '13.2987472',
 
 	// Auto-change theme
 	autoChangeTheme: true,
@@ -41,8 +41,8 @@ const CONFIG = {
 
 	// Auto-change by hour (24hr format, hh:mm)
 	changeThemeByHour: false,
-	hourDarkThemeActive: '18:30',
-	hourDarkThemeInactive: '07:00',
+	hourDarkThemeActive: '22:00',
+	hourDarkThemeInactive: '06:00',
 
 	// ┌┐ ┬ ┬┌┬┐┌┬┐┌─┐┌┐┌┌─┐
 	// ├┴┐│ │ │  │ │ ││││└─┐
@@ -59,7 +59,7 @@ const CONFIG = {
 			id: '2',
 			name: 'Mail',
 			icon: 'envelope-simple',
-			link: 'https://mail.google.com/',
+			link: 'https://outlook.com/',
 		},
 		{
 			id: '3',
@@ -136,20 +136,20 @@ const CONFIG = {
 			id: '1',
 			links: [
 				{
-					name: 'Gmail',
-					link: 'https://mail.google.com/',
+					name: 'Outlook',
+					link: 'https://outlook.com/',
 				},
 				{
 					name: 'Calendar',
-					link: 'https://calendar.google.com/',
+					link: 'https://outlook.com/',
 				},
 				{
 					name: 'Drive',
-					link: 'https://drive.google.com/',
+					link: 'file:///mnt/olympus/',
 				},
 				{
-					name: 'Keep',
-					link: 'https://keep.google.com/',
+					name: 'Notes',
+					link: 'file:///mnt/olympus/Obsidian%20Vault/',
 				},
 			],
 		},
@@ -158,8 +158,8 @@ const CONFIG = {
 			id: '2',
 			links: [
 				{
-					name: 'Stack Overflow',
-					link: 'https://stackoverflow.com/',
+					name: 'Huggingface',
+					link: 'https://huggingface.co/',
 				},
 				{
 					name: 'MDN',
